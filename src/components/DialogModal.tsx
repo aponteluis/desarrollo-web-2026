@@ -58,16 +58,18 @@ const DialogModal = ({
 
       <div className="flex gap-3">
         <button
+          type="button"
           onClick={proceedAndClose}
           className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white transition hover:bg-indigo-700"
         >
-          Borrar
+          Si, eliminar
         </button>
         <button
+          type="button"
           onClick={onClose}
           className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 font-medium text-slate-700 transition hover:bg-slate-100"
         >
-          Cerrar
+          Cancelar
         </button>
       </div>
     </dialog>

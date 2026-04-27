@@ -3,6 +3,7 @@ import PacienteDetalle from "./PacienteDetalle"
 import { usePacienteStore } from '../store/store'
 import DialogModal from "./DialogModal";
 import { useState } from "react";
+import { toast } from "sonner";
 
 type PacienteProps = {
     paciente: Patient
@@ -19,6 +20,7 @@ const Paciente = ({ paciente }: PacienteProps) => {
 
     const handleClickEliminar = () => {
         eliminarPaciente(paciente.id)
+        toast.success(`Paciente ${paciente.name} eliminado correctamente`)
     }
 
     return (
@@ -49,7 +51,10 @@ const Paciente = ({ paciente }: PacienteProps) => {
                     onProceed={onProceed}
                     onClose={() => setIsOpened(false)}
                 >
-                    <p>¿Estás seguro de que quieres eliminar este paciente?</p>
+                    <p className="text-slate-700">
+                        Estas a punto de eliminar al paciente <span className="font-semibold">{paciente.name}</span>.
+                    </p>
+                    <p className="mt-2 text-sm text-slate-500">Esta accion no se puede deshacer.</p>
                 </DialogModal>
             </div>
         </div>
