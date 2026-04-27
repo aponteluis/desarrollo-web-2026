@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { DraftPatient, Patient } from '../types'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -24,7 +25,7 @@ const crearPaciente = (data: DraftPatient): Patient => {
 
 
 // 3. Crear el store
-export const usePacienteStore = create<PacientesState>((set) => ({
+export const usePacienteStore = create<PacientesState>()(persist((set) => ({
     pacientes: [],
     pacienteActivoId: null,
     agregarPaciente: (data) => set((state) => ({
@@ -41,4 +42,9 @@ export const usePacienteStore = create<PacientesState>((set) => ({
         pacientes: state.pacientes.filter((paciente) => paciente.id !== id),
         pacienteActivoId: state.pacienteActivoId === id ? null : state.pacienteActivoId
     }))
+}), {
+    name: 'pacientes-storage',
+    partialize: (state) => ({
+        pacientes: state.pacientes
+    })
 }))
